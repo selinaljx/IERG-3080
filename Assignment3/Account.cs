@@ -21,7 +21,7 @@ namespace Assignment_3
         public virtual void Report()
         {
             //print the read file content
-            Console.WriteLine(" {0} balance = {1}",this.ID, this.Balance);
+            Console.WriteLine("{0} {1} balance = {2}",this.Type, this.ID, this.Balance);
         }
 
         
