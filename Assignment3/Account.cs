@@ -7,24 +7,23 @@ namespace Assignment_3
 {
     class Account
     {
-        public string Region { get; private set; }
-        public string Branch { get; private set; }
         public string ID { get; private set; }
-        public string Balance { get; private set; }
+        public double Balance { get; set; }
+        public string Type { get; private set; }
 
-        public Account(string region, string branch, string id, string balance)
+        public Account(string id, string balance, string type)
         {
-            this.Region = region;
-            this.Branch = branch;
             this.ID = id;
-            this.Balance = balance;
+            this.Balance = Double.Parse(balance);
+            this.Type = type;
         }
 
         public virtual void Report()
         {
             //print the read file content
-            Console.WriteLine(" {0}-{1}-{2} balance={3}",this.Region, this.Branch, this.ID, this.Balance);
-
+            Console.WriteLine(" {0} balance = {1}",this.ID, this.Balance);
         }
+
+        
     }
 }
