@@ -7,13 +7,11 @@ namespace Assignment_3
 {
     class CurrentAccount : Account
     {
-        public string Region { get; private set; }
-        public string Branch { get; private set; }
         public string ID { get; private set; }
-        public string Balance { get; private set; }
-
-        public CurrentAccount(string region, string branch, string id, string balance) : base (region, branch, id, balance)
-        { }
+        public double Balance { get; private set; }
+        public string Type { get; private set; }
+        public CurrentAccount(string id, string balance, string type) : base (id, balance, type)
+        {}
 
         public override void Report()
         {
