@@ -15,7 +15,6 @@ namespace Assignment_3
 
         public override void Report()
         {
-            Console.Write("Current account");
             base.Report();
         }
     }
