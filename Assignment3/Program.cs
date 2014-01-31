@@ -10,14 +10,37 @@ namespace Assignment_3
         static void Main(string[] args)
         {
             MyReader reader = new MyReader();
-            List<Account> list = reader.ImportAccount("Assignment4.csv");
+            Dictionary<string, List<Account>> regionList = reader.ImportAccount("Assignment4.csv");
+            
 
-            foreach(Account acc in list)
+            foreach(string region in regionList.Keys)
             {
-                acc.Report();
+                List<Account> accountList = regionList[region];
+                foreach (Account acc in accountList)
+                {
+                    acc.Report();
+                }
             }
 
+            
+
             Console.ReadLine();
+
+
+            Transaction transaction = new Transaction();
+            transaction.Process(regionList);
+
+            foreach(string region in regionList.Keys)
+            {
+                List<Account> accountList = regionList[region];
+                foreach (Account acc in accountList)
+                {
+                    acc.Report();
+                }
+            }
+
+                Console.ReadLine();
+
         }
     }
 }
