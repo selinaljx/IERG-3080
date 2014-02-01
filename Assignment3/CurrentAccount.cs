@@ -17,5 +17,10 @@ namespace Assignment_3
         {
             base.Report();
         }
+
+        internal double Deposit(double amount, double balance)
+        {
+            return balance += amount;
+        }
     }
 }
