@@ -11,8 +11,8 @@ namespace Assignment_3
         internal void Process(Dictionary<string, List<Account>> regionList)
         {
             var file = new StreamReader(File.OpenRead("transactions.csv"));
-            //SavingAccount savingAccount = new SavingAccount("", "");
-            //CurrentAccount currentAccount = new CurrentAccount("", "", "", "");
+            SavingAccount savingAccount = new SavingAccount("", "0", "");
+            CurrentAccount currentAccount = new CurrentAccount("", "0", "");
 
             var i = 0;
             while (!file.EndOfStream)
@@ -44,7 +44,7 @@ namespace Assignment_3
                             foreach (Account acc in accountList)
                             {
                                 if (acc.ID == id && acc.Type == type)
-                                    acc.Balance -= amount;
+                                   acc.Balance = savingAccount.Withdraw(amount, acc.Balance);
                             }
                             break;
                         case "Deposit":
@@ -52,19 +52,31 @@ namespace Assignment_3
                             foreach (Account acc in accountList)
                             {
                                 if (acc.ID == id && acc.Type == type)
-                                    acc.Balance += amount;
+                                    acc.Balance = savingAccount.Deposit(amount, acc.Balance);
                             }
                             break;
 
                         case "Transfer":
+                            double save = 0, current = 0;
                             foreach (Account acc in accountList)
                             {
                                 if (acc.ID == id)
                                 {
                                     if (acc.Type == type)
-                                        acc.Balance -= amount;
+                                        save = acc.Balance;
                                     if (acc.Type == toType)
-                                        acc.Balance += amount;
+                                        current = acc.Balance;
+                                }
+
+                                //return an array of double
+                                double[] trans = savingAccount.Transfer(currentAccount, amount, save, current);
+
+                                if (acc.ID == id)
+                                {
+                                    if (acc.Type == type)
+                                        acc.Balance = trans[0];
+                                    if (acc.Type == toType)
+                                        acc.Balance = trans[1];
                                 }
                             }
                             break;
